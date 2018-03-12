@@ -17,7 +17,8 @@ void left();
 void right();
 void stop();
 bool goesFW = true;
-void setup() {
+void setup() 
+{
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
   pinMode(rec, INPUT);
@@ -29,7 +30,8 @@ void setup() {
   irrecv.enableIRIn(); // Start the receiver
 }
 
-void loop() {
+void loop() 
+{
   float duration, distance;
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
@@ -42,15 +44,17 @@ void loop() {
   distance = (duration / 2) * 0.0344;
   if (distance <= 5 && goesFW == true)
     stop();
-  if (irrecv.decode( & results)) {
+  if (irrecv.decode( & results)) 
+  {
     translateIR();
     irrecv.resume();
   }
 }
 
-void translateIR() {
-  switch (results.value) {
-  
+void translateIR() 
+{
+  switch (results.value)
+  {
   case 0xFF38C7: //FW//
     {
       goesFW = true;
@@ -88,10 +92,13 @@ void translateIR() {
       speedM1 = 200;
       speedM2 = 10;
 
-      if (goesFW == true) {
+      if (goesFW == true) 
+      {
         fw(speedM1, speedM2);
         break;
-      } else {
+      } 
+      else 
+      {
         bw(speedM1, speedM2);
         break;
       }
@@ -101,10 +108,13 @@ void translateIR() {
       speedM1 = 200;
       speedM2 = 10;
 
-      if (goesFW == true) {
+      if (goesFW == true) 
+      {
         fw(speedM1, speedM2);
         break;
-      } else {
+      } 
+      else 
+      {
         bw(speedM1, speedM2);
         break;
       }
@@ -113,10 +123,13 @@ void translateIR() {
     {
       speedM2 = 200;
       speedM1 = 10;
-      if (goesFW == true) {
+      if (goesFW == true) 
+      {
         fw(speedM1, speedM2);
         break;
-      } else {
+      } 
+      else 
+      {
         bw(speedM1, speedM2);
         break;
       }
@@ -125,10 +138,13 @@ void translateIR() {
     {
       speedM2 = 200;
       speedM1 = 10;
-      if (goesFW == true) {
+      if (goesFW == true) 
+      {
         fw(speedM1, speedM2);
         break;
-      } else {
+      } 
+      else 
+      {
         bw(speedM1, speedM2);
         break;
       }
@@ -159,7 +175,8 @@ void translateIR() {
   delay(50);
 }
 
-void fw(int val1, int val2) {
+void fw(int val1, int val2) 
+{
   analogWrite(M1A, val1);
   digitalWrite(M1B, 0);
 
@@ -167,7 +184,8 @@ void fw(int val1, int val2) {
   digitalWrite(M2B, 0);
 }
 
-void bw(int val1, int val2) {
+void bw(int val1, int val2) 
+{
   analogWrite(M1B, val1);
   digitalWrite(M1A, 0);
 
@@ -175,7 +193,8 @@ void bw(int val1, int val2) {
   digitalWrite(M2A, 0);
 }
 
-void spinLeft() {
+void spinLeft() 
+{
   digitalWrite(M1A, 1);
   digitalWrite(M1B, 0);
 
@@ -183,7 +202,8 @@ void spinLeft() {
   digitalWrite(M2B, 1);
 }
 
-void spinRight() {
+void spinRight() 
+{
   digitalWrite(M1A, 0);
   digitalWrite(M1B, 1);
 
@@ -191,7 +211,8 @@ void spinRight() {
   digitalWrite(M2B, 0);
 } 
 
-void stop() {
+void stop() 
+{
   digitalWrite(M1A, LOW);
   digitalWrite(M1B, LOW);
 
